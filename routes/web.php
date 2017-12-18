@@ -11,19 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use App\Project;
+use App\Task;
+
+Route::get('/', 'ProjectsController@index');
+
+Route::bind('tasks', function($value, $route) {
+    return App\Task::where('slug', $value)->first();
+});
+Route::bind('projects', function($project) {
+    return App\Project::where('slug', $value)->first();
 });
 
 Route::resource('projects', 'ProjectsController');
-//Route::resource('tasks', 'TasksController');
 Route::resource('projects.tasks', 'TasksController');
 
 
-Route::bind('tasks', function($value, $route){
-    return App\Task::whereSlug($value)->first();
-});
-
-Route::bind('projects', function($value, $route){
-    return App\Project::whereSlug($value)->first();
-});
