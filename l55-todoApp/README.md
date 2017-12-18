@@ -1,2 +1,0 @@
-# isok
-Isok public repo
